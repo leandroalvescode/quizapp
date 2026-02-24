@@ -1,9 +1,7 @@
 class Perguntas{
-  String? questao;
-  bool? respostaDaQuestao;
+   final String questao;
+  final bool respostaDaQuestao;
 
-  Perguntas ({String? q, bool? r}){
-    questao = q;
-    respostaDaQuestao= r;
-  }
+  Perguntas ({required this.questao, required this.respostaDaQuestao});
+   
 }

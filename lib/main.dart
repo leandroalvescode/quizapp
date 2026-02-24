@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'perguntas.dart';
 
 void main() => runApp(QuizApp());
 
@@ -27,13 +28,11 @@ class _QuizPageState extends State<QuizPage> {
 
   int numeroDaQuestao = 0;
 
-  List<String> perguntasExibidas =[
-    'O metrô é um dos meios de transporte mais seguros do mundo.',
-    'A culinária brasileira é uma das melhores do mundo.',
-    'Vacas podem voar, assim como peixes utilizam os pés para andar.'
-    ] ;
-
-    List<bool> resposta = [true, true, false];
+    List<Perguntas> bancodePerguntas = [
+     Perguntas(questao:'O metrô é um dos meios de transporte mais seguros do mundo.',respostaDaQuestao: true),
+     Perguntas(questao: 'A culinária brasileira é uma das melhores do mundo.',respostaDaQuestao: true),
+     Perguntas(questao: 'Vacas podem voar, assim como peixes utilizam os pés para andar.', respostaDaQuestao:false)
+    ];
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +45,7 @@ class _QuizPageState extends State<QuizPage> {
           child: Padding(
             padding: EdgeInsets.all(10.0),
             child: Center(
-              child: Text(perguntasExibidas[numeroDaQuestao],
+              child: Text(bancodePerguntas[numeroDaQuestao].questao,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -73,7 +72,7 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 //O usuário clica no botão verdadeiro.
                 setState(() {
-                  bool resultado = resposta[numeroDaQuestao];
+                  bool resultado = bancodePerguntas[numeroDaQuestao].respostaDaQuestao;
                   
                   if (resultado == true) {
                     print("certo");
@@ -106,7 +105,7 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 //O usuário clica no botão falso.
                 setState(() {
-                  bool resultado = resposta[numeroDaQuestao];
+                  bool resultado = bancodePerguntas[numeroDaQuestao].respostaDaQuestao;
                   
                   if (resultado == false) {
                     print("certo");
