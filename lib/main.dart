@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'perguntas.dart';
+import 'helper.dart';
+
+Helper helper = Helper();
 
 void main() => runApp(QuizApp());
 
@@ -26,14 +28,7 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
 
-  int numeroDaQuestao = 0;
-
-    List<Perguntas> bancodePerguntas = [
-     Perguntas(questao:'O metrô é um dos meios de transporte mais seguros do mundo.',respostaDaQuestao: true),
-     Perguntas(questao: 'A culinária brasileira é uma das melhores do mundo.',respostaDaQuestao: true),
-     Perguntas(questao: 'Vacas podem voar, assim como peixes utilizam os pés para andar.', respostaDaQuestao:false)
-    ];
-
+ 
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -45,7 +40,7 @@ class _QuizPageState extends State<QuizPage> {
           child: Padding(
             padding: EdgeInsets.all(10.0),
             child: Center(
-              child: Text(bancodePerguntas[numeroDaQuestao].questao,
+              child: Text(helper.obterQuestao(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -72,7 +67,7 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 //O usuário clica no botão verdadeiro.
                 setState(() {
-                  bool resultado = bancodePerguntas[numeroDaQuestao].respostaDaQuestao;
+                  bool resultado = helper.obterResposta();
                   
                   if (resultado == true) {
                     print("certo");
@@ -80,7 +75,7 @@ class _QuizPageState extends State<QuizPage> {
                     print("errado");
                   };
                   
-                   numeroDaQuestao++;
+                   helper.proximaPergunta();
                 });
               },
             ),
@@ -93,8 +88,7 @@ class _QuizPageState extends State<QuizPage> {
               style: TextButton.styleFrom(
                 backgroundColor: Colors.grey.shade800,
               ) ,
-              
-              
+
               child: Text(
                 'Falso',
                 style: TextStyle(
@@ -105,16 +99,15 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 //O usuário clica no botão falso.
                 setState(() {
-                  bool resultado = bancodePerguntas[numeroDaQuestao].respostaDaQuestao;
+                  bool resultado = helper.obterResposta();
                   
                   if (resultado == false) {
-                    print("certo");
+                    print("certo"); 
                   } else{
                     print("errado");
                   };
                   
-                   numeroDaQuestao++;
-
+                   helper.proximaPergunta();
                 });
               
               },
