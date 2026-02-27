@@ -28,7 +28,20 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
 
- 
+  void conferirResposta(bool respostaSelecionada){
+    setState(() {
+                  bool resultado = helper.obterResposta();
+                  
+                  if (resultado == respostaSelecionada) {
+                    print("certo"); 
+                  } else{
+                    print("errado");
+                  };
+                  
+                   helper.proximaPergunta();
+                });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -67,15 +80,7 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 //O usuário clica no botão verdadeiro.
                 setState(() {
-                  bool resultado = helper.obterResposta();
-                  
-                  if (resultado == true) {
-                    print("certo");
-                  } else{
-                    print("errado");
-                  };
-                  
-                   helper.proximaPergunta();
+                  conferirResposta(true);
                 });
               },
             ),
@@ -98,17 +103,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //O usuário clica no botão falso.
-                setState(() {
-                  bool resultado = helper.obterResposta();
-                  
-                  if (resultado == false) {
-                    print("certo"); 
-                  } else{
-                    print("errado");
-                  };
-                  
-                   helper.proximaPergunta();
-                });
+                conferirResposta(false);
               
               },
               ),
