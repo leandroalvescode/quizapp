@@ -4,6 +4,8 @@ import 'perguntas.dart';
 
 
 class Helper {
+
+  
   List<Perguntas> _bancoDePerguntas = [
     
     Perguntas(
@@ -46,6 +48,7 @@ class Helper {
         'O cartão de crédito pode ser considerado uma moeda virtual.', 
         false),
   ];
+
  
   void proximaPergunta(){
     if(_numeroDaQuestao < _bancoDePerguntas.length -1){

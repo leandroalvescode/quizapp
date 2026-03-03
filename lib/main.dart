@@ -28,19 +28,23 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
 
+  List<Icon> marcadorDePontos= [];
+
   void conferirResposta(bool respostaSelecionada){
     setState(() {
                   bool resultado = helper.obterResposta();
                   
                   if (resultado == respostaSelecionada) {
-                    print("certo"); 
+                    marcadorDePontos.add(Icon(Icons.check, color: Colors.greenAccent)); 
                   } else{
-                    print("errado");
+                    marcadorDePontos.add(Icon(Icons.close, color: Colors.redAccent)); 
                   };
                   
                    helper.proximaPergunta();
                 });
   }
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -79,9 +83,8 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //O usuário clica no botão verdadeiro.
-                setState(() {
                   conferirResposta(true);
-                });
+               
               },
             ),
           ),
@@ -110,6 +113,7 @@ class _QuizPageState extends State<QuizPage> {
             ),
         ),
         //TODO: Adicionar uma Row aqui para o marcador de pontos.
+        Row(children:marcadorDePontos)
       ],
     );
   }
