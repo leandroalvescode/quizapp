@@ -1,10 +1,10 @@
 import 'perguntas.dart';
 
- int _numeroDaQuestao = 0;
 
 
 class Helper {
 
+ int _numeroDaQuestao = 0;
   
   List<Perguntas> _bancoDePerguntas = [
     
@@ -64,4 +64,20 @@ class Helper {
     return _bancoDePerguntas[_numeroDaQuestao].respostaDaQuestao;
   }
 
+  bool confereFimDaExecucao(){
+    return (_numeroDaQuestao == _bancoDePerguntas.length -1);
+  }
+  void resetar(){
+    _numeroDaQuestao = 0;
+  }
+
 }
+
+
+
+//TODO: Passo 3.a) - Crie um método chamado confereFimDaExecucao() que verifica se a última questão foi alcançada. Caso isso tenha ocorrido, devemos ter um retorno indicando, que pode ser por exemplo, um boleano como o 'true'. Caso ainda não seja a última questão, você pode por exemplo, retornar um 'false'.
+
+//TODO: Passo 3.b) - Use um 'print' para verificar se o método confereFimDaExecucao() está funcionando como deveria, ou seja, retornando true para quando for a última questão da lista.
+
+//TODO: Passo 4.b) - Crie um método para resetar o valor da propriedade _numeroDaQuestaoAtual para 0, quando for necessário.
+

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'helper.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
-Helper helper = Helper();
 
 void main() => runApp(QuizApp());
 
@@ -28,20 +28,42 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
 
+  Helper helper = Helper(); 
+  
   List<Icon> marcadorDePontos= [];
 
   void conferirResposta(bool respostaSelecionada){
     setState(() {
-                  bool resultado = helper.obterResposta();
+      //TODO: Passo 4 - Use o IF/ELSE para verificar se chegou-se ao fim do quiz. Se isso for verdadeiro (true), siga os passos: 4.a, 4.b, 4.c e 4.d
+      //TODO: Passo 4.a) - Mostre um alerta utilizando o pacote rflutter_alert (se ficar em dúvida dê uma olhada na documentação do pacote: https://pub.dev/packages/rflutter_alert).
+      //TODO: Passo 4.c) - Reinicie o valor da propriedade _numeroDaQuestaoAtual.
+      //TODO: Passo 4.d) - Esvazie a lista marcadorDePontos para uma nova rodada.
+      //TODO: Passo 5 - 'Se' não for o fim da execução do app ainda, ou seja, se não estivermos na última questão,entre na estrutura condicional e continue com a verificação da resposta.
+
+    bool resultado = helper.obterResposta();
                   
-                  if (resultado == respostaSelecionada) {
-                    marcadorDePontos.add(Icon(Icons.check, color: Colors.greenAccent)); 
-                  } else{
-                    marcadorDePontos.add(Icon(Icons.close, color: Colors.redAccent)); 
-                  };
-                  
-                   helper.proximaPergunta();
-                });
+      if (resultado == respostaSelecionada) {
+        marcadorDePontos.add(Icon(Icons.check, color: Colors.greenAccent)); 
+      } else 
+       { marcadorDePontos.add(Icon(Icons.close, color: Colors.redAccent)); 
+        };
+          
+
+      if(helper.confereFimDaExecucao() == true){
+        Alert(
+          context: context,
+          title: "FIM DO QUIZ",
+          desc: "Flutter is awesome.").show();
+
+        helper.resetar();
+        marcadorDePontos.clear();
+
+
+      } else{
+        helper.proximaPergunta();
+      }
+
+        });
   }
 
   
@@ -82,7 +104,6 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                //O usuário clica no botão verdadeiro.
                   conferirResposta(true);
                
               },
@@ -105,14 +126,12 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                //O usuário clica no botão falso.
                 conferirResposta(false);
               
               },
               ),
             ),
         ),
-        //TODO: Adicionar uma Row aqui para o marcador de pontos.
         Row(children:marcadorDePontos)
       ],
     );
