@@ -49,11 +49,11 @@ class _QuizPageState extends State<QuizPage> {
         };
           
 
-      if(helper.confereFimDaExecucao() == true){
+      if(helper.confereFimDaExecucao()){
         Alert(
           context: context,
           title: "FIM DO QUIZ",
-          desc: "Flutter is awesome.").show();
+          desc: "Try again").show();
 
         helper.resetar();
         marcadorDePontos.clear();
